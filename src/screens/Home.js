@@ -9,17 +9,38 @@ import {
   ScrollView
 } from "react-native";
 import Orientation from "react-native-orientation";
+import Icons from "react-native-vector-icons/FontAwesome5";
+
 import { Colors, CommonStyles } from "../assets/styles";
 import CardItems from "../components/CardItems";
+import HeaderComponent from "../components/HeaderComponent";
 
 class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
-  
+
   static navigationOptions = {
-    title: 'Movies',
+    title: "Movies",
+    headerLeft: (
+      <Icons
+        name="bars"
+        style={{
+          fontSize: 20,
+          color: Colors.white,
+          textAlign: "center",
+          paddingLeft: 15
+        }}
+      />
+    ),
+    headerStyle: {
+      backgroundColor: Colors.themeRed
+    },
+    headerTintColor: Colors.white,
+    headerTitleStyle: {
+      fontWeight: "bold"
+    }
   };
 
   componentDidMount() {
@@ -36,15 +57,23 @@ class Home extends Component {
     });
   }
 
-  // static navigationOptions = {
-  //   header: null
-  // };
+  static navigationOptions = {
+    drawerIcon:({tintColor})=>(
+      <Icons name="film" style={{color:tintColor, fontSize:18}}/>
+    ),
+    title:'Movies'
+  };
+
+  toggleDrawer = () => {
+    this.props.navigation.openDrawer();
+  };
 
   render() {
     return (
       <View style={styles.container}>
-      <StatusBar backgroundColor={Colors.themeRedDark} />
-        <View>
+        <StatusBar backgroundColor={Colors.themeRedDark} />
+        <HeaderComponent name="" toggle={this.toggleDrawer} />
+        <ScrollView>
           <View style={{ paddingHorizontal: 10 }}>
             <Text
               style={[
@@ -128,7 +157,7 @@ class Home extends Component {
             })
           }
         /> */}
-        </View>
+        </ScrollView>
       </View>
     );
   }
@@ -137,8 +166,7 @@ export default Home;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    paddingVertical: 10
+    flex: 1
   },
   textStyle: {
     fontFamily: "Roboto-Regular"
