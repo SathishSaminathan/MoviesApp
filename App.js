@@ -8,6 +8,8 @@
 
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, Dimensions} from 'react-native';
+import SplashScreen from 'react-native-splash-screen'
+
 import AppContainer from './src/navigations/AppStackNavigator';
 import AppDrawerContainer from './src/navigations/AppDrawerNavigator';
 
@@ -15,6 +17,12 @@ export default class App extends Component {
 
   constructor (props) {
     super(props)
+  }
+
+  componentDidMount() {
+      setTimeout(() => {
+        SplashScreen.hide();
+      }, 550);
   }
 
   render() {
