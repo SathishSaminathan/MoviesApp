@@ -13,26 +13,6 @@ const AppStackNavigator = createStackNavigator(
   },
   {
     initialRouteName: "Home",
-    defaultNavigationOptions: {
-      headerLeft: (
-        <Icons
-          name="bars"
-          style={{
-            fontSize: 20,
-            color: Colors.white,
-            textAlign: "center",
-            paddingLeft: 15
-          }}
-        />
-      ),
-      headerStyle: {
-        backgroundColor: Colors.themeRed
-      },
-      headerTintColor: Colors.white,
-      headerTitleStyle: {
-        fontWeight: "bold"
-      }
-    }
   }
 );
 
