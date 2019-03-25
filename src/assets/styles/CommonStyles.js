@@ -13,6 +13,10 @@ const CommonStyles = {
   textLarge:{
     fontFamily: "Roboto-Regular",
     fontSize:20,
+  },  
+  textXLarge:{
+    fontFamily: "Roboto-Regular",
+    fontSize:30,
   },
   textSmallBold:{
     fontFamily: "Roboto-Regular",
@@ -28,7 +32,12 @@ const CommonStyles = {
     fontFamily: "Roboto-Regular",
     fontSize:20,
     fontWeight: 'bold',
-  }
+  },  
+  textXLargeBold:{
+    fontFamily: "Roboto-Regular",
+    fontSize:30,
+    fontWeight: 'bold',
+  },
 };
 
 export default CommonStyles;
