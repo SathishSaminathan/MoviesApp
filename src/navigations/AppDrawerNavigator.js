@@ -56,9 +56,11 @@ const AppDrawerNavigator = createDrawerNavigator(
   {
     Home: Home,
     Collection: Collection,
-    RateUs:RateUs
+    RateUs:RateUs,
+    VideoScreen:VideoScreen
   },
   {
+    unmountInactiveRoutes:true,
     contentComponent: CustomDrawerComponent,
     contentOptions: {
       activeTintColor: Colors.themeRed,
@@ -66,7 +68,7 @@ const AppDrawerNavigator = createDrawerNavigator(
       inactiveBackgroundColor:Colors.white
     },
     drawerType:'slide',
-    drawerWidth:width
+    drawerWidth:width,
   }
 );
 

@@ -15,11 +15,21 @@ import { Colors, CommonStyles } from "../assets/styles";
 import CardItems from "../components/CardItems";
 import HeaderComponent from "../components/HeaderComponent";
 
+import firebaseDb from "../config/db";
+
 class Home extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
   }
+
+  state = {
+    GhostMoviesRef: firebaseDb.database().ref("ghostmovies"),
+    ActionMoviesRef: firebaseDb.database().ref("actionmovies"),
+    FantasyMoviesRef: firebaseDb.database().ref("fantasymovies"),
+    GhostMovies: [],
+    ActionMovies: [],
+    FantasyMovies: []
+  };
 
   static navigationOptions = {
     title: "Movies",
@@ -44,24 +54,45 @@ class Home extends Component {
   };
 
   componentDidMount() {
-    Orientation.lockToPortrait();
+    let GhostMovies = [];
+    let ActionMovies = [];
+    let FantasyMovies = [];
     this.props.navigation.addListener("didFocus", () => {
       // user has navigated to this screen
       Orientation.lockToPortrait();
       // alert('didFocus')
     });
 
-    this.props.navigation.addListener("didBlur", () => {
-      // user has navigated away from this screen
-      // alert('didBlur')
+    this.state.GhostMoviesRef.on("child_added", snap => {
+      GhostMovies.push(snap.val());
+      console.log("messages...", GhostMovies);
+      this.setState({
+        GhostMovies
+      });
+    });
+
+    this.state.ActionMoviesRef.on("child_added", snap => {
+      ActionMovies.push(snap.val());
+      console.log("messages...", ActionMovies);
+      this.setState({
+        ActionMovies
+      });
+    });
+
+    this.state.FantasyMoviesRef.on("child_added", snap => {
+      FantasyMovies.push(snap.val());
+      console.log("messages...", FantasyMovies);
+      this.setState({
+        FantasyMovies
+      });
     });
   }
 
   static navigationOptions = {
-    drawerIcon:({tintColor})=>(
-      <Icons name="film" style={{color:tintColor, fontSize:18}}/>
+    drawerIcon: ({ tintColor }) => (
+      <Icons name="film" style={{ color: tintColor, fontSize: 18 }} />
     ),
-    title:'Movies'
+    title: "Movies"
   };
 
   toggleDrawer = () => {
@@ -69,6 +100,7 @@ class Home extends Component {
   };
 
   render() {
+    const { GhostMovies, ActionMovies, FantasyMovies } = this.state;
     return (
       <View style={styles.container}>
         <StatusBar backgroundColor={Colors.themeRedDark} />
@@ -87,15 +119,15 @@ class Home extends Component {
             <ScrollView
               contentContainerStyle={{
                 paddingVertical: 10,
-                paddingHorizontal: 3
+                paddingHorizontal: 3,
+                height: 200
               }}
               horizontal={true}
               showsHorizontalScrollIndicator={false}
             >
-              <CardItems />
-              <CardItems />
-              <CardItems />
-              <CardItems />
+              {GhostMovies.map((movie, i) => (
+                <CardItems key={i} movie={movie} {...this.props} />
+              ))}
             </ScrollView>
           </View>
 
@@ -112,15 +144,15 @@ class Home extends Component {
             <ScrollView
               contentContainerStyle={{
                 paddingVertical: 10,
-                paddingHorizontal: 3
+                paddingHorizontal: 3,
+                height: 200
               }}
               horizontal={true}
               showsHorizontalScrollIndicator={false}
             >
-              <CardItems />
-              <CardItems />
-              <CardItems />
-              <CardItems />
+              {ActionMovies.map((movie, i) => (
+                <CardItems key={i} movie={movie} {...this.props} />
+              ))}
             </ScrollView>
           </View>
 
@@ -132,20 +164,20 @@ class Home extends Component {
                 { fontWeight: "bold" }
               ]}
             >
-              Thriller Movies
+              Fantasy Movies
             </Text>
             <ScrollView
               contentContainerStyle={{
                 paddingVertical: 10,
-                paddingHorizontal: 3
+                paddingHorizontal: 3,
+                height: 200
               }}
               horizontal={true}
               showsHorizontalScrollIndicator={false}
             >
-              <CardItems />
-              <CardItems />
-              <CardItems />
-              <CardItems />
+              {FantasyMovies.map((movie, i) => (
+                <CardItems key={i} movie={movie} {...this.props} />
+              ))}
             </ScrollView>
           </View>
           {/* <Button
