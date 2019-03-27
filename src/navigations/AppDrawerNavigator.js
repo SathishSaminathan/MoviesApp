@@ -55,14 +55,14 @@ const CustomDrawerComponent = props => (
 
 const AppDrawerNavigator = createDrawerNavigator(
   {
-    SearchMovies: SearchMovies,
     Home: Home,
+    SearchMovies: SearchMovies,
     Collection: Collection,
     RateUs: RateUs,
     VideoScreen: VideoScreen
   },
   {
-    initialRouteName:"Home",
+    // initialRouteName:"Home",
     unmountInactiveRoutes: true,
     contentComponent: CustomDrawerComponent,
     contentOptions: {
