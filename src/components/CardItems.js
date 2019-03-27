@@ -24,7 +24,6 @@ class CardItems extends Component {
           elevation: 5
         }}
         onPress={()=>this.props.navigation.navigate('VideoScreen', {
-          itemId: 86,
           URL: movie.movieURL
         })}
       >

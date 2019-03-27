@@ -47,18 +47,22 @@ class VideoScreen extends Component {
   render() {
     //   console.log(this.props.navigation)
     const { Loading } = this.state;
-    const { URL } = this.props.navigation.state.params;
+    const { URL, type, videoURL } = this.props.navigation.state.params;
+    console.log(this.props)
     return (
       <View
         style={{
           flex: 1
         }}
       >
-        <StatusBar backgroundColor={Colors.themeRedDark} />
+        <StatusBar backgroundColor={Colors.themeRedDark} hidden={!Loading}/>
         <WebView
           // onLayout={this.onLayout}
           source={{
-            uri: URL
+            uri:
+              type === "youtube"
+                ? `https://www.youtube.com/embed/${videoURL}`
+                : URL
           }}
           onLoadStart={() => this.setState({ Loading: true })}
           onLoadEnd={() => this.setState({ Loading: false })}
