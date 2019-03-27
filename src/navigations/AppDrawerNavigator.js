@@ -15,13 +15,14 @@ import Icons from "react-native-vector-icons/FontAwesome5";
 
 import Home from "../screens/Home";
 import VideoScreen from "../screens/VideoScreen";
-import { Colors } from "../assets/styles";
+import { Colors, CommonStyles } from "../assets/styles";
 import AppStackContainer from "./AppStackNavigator";
 import Collection from "../screens/Collection";
 import Images from "../assets/images";
 import RateUs from "../screens/RateUs";
+import SearchMovies from "../screens/SearchMovies";
 
-const { width, height } = Dimensions.get('window')
+const { width, height } = Dimensions.get("window");
 
 const CustomDrawerComponent = props => (
   <SafeAreaView
@@ -54,21 +55,24 @@ const CustomDrawerComponent = props => (
 
 const AppDrawerNavigator = createDrawerNavigator(
   {
+    SearchMovies: SearchMovies,
     Home: Home,
     Collection: Collection,
-    RateUs:RateUs,
-    VideoScreen:VideoScreen
+    RateUs: RateUs,
+    VideoScreen: VideoScreen
   },
   {
-    unmountInactiveRoutes:true,
+    initialRouteName:"Home",
+    unmountInactiveRoutes: true,
     contentComponent: CustomDrawerComponent,
     contentOptions: {
       activeTintColor: Colors.themeRed,
-      activeBackgroundColor:Colors.white,
-      inactiveBackgroundColor:Colors.white
+      activeBackgroundColor: Colors.white,
+      inactiveBackgroundColor: Colors.white,
+      // activeLabelStyle:{fontSize:20,color:Colors.themeBlue},
     },
-    drawerType:'slide',
-    drawerWidth:width,
+    drawerType: "slide",
+    drawerWidth: width
   }
 );
 
