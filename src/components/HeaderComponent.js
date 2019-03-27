@@ -13,7 +13,8 @@ class HeaderComponent extends Component {
           height: HEADER_HEIGHT,
           backgroundColor: Colors.themeRed,
           alignItems: "center",
-          flexDirection: "row"
+          flexDirection: "row",
+          elevation:10
         }}
       >
         <Icons
